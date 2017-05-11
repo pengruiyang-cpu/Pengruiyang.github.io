@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jquery原理2 | 我的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="框架和库是什么?        库: 仓库, 表示的是很多为了实现特殊功能而封装的, 便于使用开发的 函数, 对象 和 常量等.            例如:            // 在 dom 元素下, 获得 复合 tagName 的元素,            // 如果不提供 dom 参数, 那么就是默认 document            function getTag( tagN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery原理2">
+<meta property="og:url" content="http://yoursite.com/2017/05/11/jquery原理2/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="框架和库是什么?        库: 仓库, 表示的是很多为了实现特殊功能而封装的, 便于使用开发的 函数, 对象 和 常量等.            例如:            // 在 dom 元素下, 获得 复合 tagName 的元素,            // 如果不提供 dom 参数, 那么就是默认 document            function getTag( tagN">
+<meta property="og:updated_time" content="2017-05-11T03:10:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery原理2">
+<meta name="twitter:description" content="框架和库是什么?        库: 仓库, 表示的是很多为了实现特殊功能而封装的, 便于使用开发的 函数, 对象 和 常量等.            例如:            // 在 dom 元素下, 获得 复合 tagName 的元素,            // 如果不提供 dom 参数, 那么就是默认 document            function getTag( tagN">
+  
+    <link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一天进步一点</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jquery原理2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/11/jquery原理2/" class="article-date">
+  <time datetime="2017-05-11T03:08:44.000Z" itemprop="datePublished">2017-05-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jquery原理2
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>框架和库是什么?<br>        库: 仓库, 表示的是很多为了实现特殊功能而封装的, 便于使用开发的 函数, 对象 和 常量等.<br>            例如:<br>            // 在 dom 元素下, 获得 复合 tagName 的元素,<br>            // 如果不提供 dom 参数, 那么就是默认 document<br>            function getTag( tagName, dom ) {<br>                dom = dom || document;<br>                return dom.getElementsByTagName( tagName );<br>            }</p>
+<pre><code>    getTag( &apos;div&apos;, dv );
+
+    在开发过程中为了实现更加方便的使用, 封装这些方法, 然后组合到一起以供使用, 这样就构成了库.
+
+框架: 是一套完整的开发解决方案. 框架一般提供了一些方便的开发格式与方法, 我们只需要按照他的格式
+    使用即可, 不需要关注一些具体的实现.
+</code></pre><a id="more"></a>
+<p>基本 DOM 方法<br>        -&gt; 什么是 DOM 操作<br>            所谓的 DOM 操作就是在操作 DOM.<br>            1) 增加 DOM 元素<br>                创建元素: $( … )<br>                加入:   $( … ).appendTo( … )<br>                       $( … ).append( … )<br>                       …<br>            2) 删除 DOM 元素<br>                $( … ).remove()<br>            3) 修改 DOM 元素<br>                所谓的修改就是 修改属性, 修改样式, 实际上将原有移除, 新加一个即可<br>        -&gt; appendTo<br>            在 jq 中该方法的含义是 将 前面的 jq 对象中包含 DOM 元素, 全部加到 后面的 元素中<br>            $( ‘<div>1</div>‘ ).appendTo( ‘body’ )<br>            新建一个 div 标签, 然后将其追加到 body 中.</p>
+<pre><code>        关于 appendTo 的参数
+            $( ... ).appendTo( &apos;body&apos; )        参数是一个选择器
+            $( ... ).appendTo( $( &apos;body&apos; ) )   参数是一个 jq 对象
+            $( ... ).appendTo( document.body ) 参数是一个 dom 对象
+        转化: 如果一个函数可以传入三种参数, 而且这三种参数的处理逻辑不太相同
+        一般来说结构就可以写成
+            function xxx ( args ) {
+                if ( typeof args == &apos;string&apos; ) {
+                    ...
+                } else if ( args.nodeType ) {
+                    ...
+                } else if ( args 是 Ace 对象 ) {
+                    ...
+                }
+            } 
+        划归: 将一个问题转化成一个已经解决的问题
+            可以将所有的情况转化成 处理 数组的 模型中
+            1) 字符串 -&gt; Ace 对象 -&gt; 数组
+            2) DOM 元素 -&gt; Ace 对象 -&gt; 数组
+            3) Ace 对象 -&gt; 数组
+
+        思考:  jq 中, $ 函数可以处理什么参数
+            $( &apos;选择器&apos; ), $( dom ), $( $( ... ) ), $( fn ), ...
+
+        如果 我们的 Ace 构造函数可以将 各种数据 转化成 Ace 对象( 即数组 )
+
+        Ace.fn.appendTo = function ( selector ) {
+            var iObj = Ace( selector ); // 数组
+
+            return this.each(function () {
+
+                for ( var i = 0; i &lt; iObj.length; i++ ) {
+                    iObj[ i ].appendChild( i == iObj.length - 1 
+                                                ? this 
+                                                : this.cloneNode( true ) );
+                }
+
+            }); 
+        };
+    -&gt; 构造函数
+        在 jq 中 构造函数参数的用法
+        1) 允许传入选择: string
+        2) 允许传入 html 字符串: string
+        3) 允许传入 dom 元素: object, 如何判断??? nodeType 属性
+        4) 允许传入 jQuery 对象: object, 如何判断??? .constructor
+            在 jquery 中原型上有一个属性 selector, 该属性用于记录选择器.
+            jquery 使用的就是该属性来判断的.
+        5) 允许传入 函数: function 相当于 onload 事件.
+        6) 数组等
+    -&gt; 考虑 返回值
+        每次需要 克隆 DOM 对象, 因此准备一个数组, 然后将数组加载完成以后生成一个新的 Ace 对象即可
+
+
+    -&gt; 记录下链破坏之前原来对象
+        iNewObj.prevObj = this
+        每次链破坏的时候, 都可以记录下来, 那么只要调用 end 方法就将原来的数据取出来即可
+    -&gt; append
+    -&gt; prepend
+    -&gt; prependTo
+    -&gt; insertAfter
+    -&gt; insertBefore
+    -&gt; after
+    -&gt; before
+
+-&gt; 成员访问方法
+    就是在访问相关的元素( 访问亲属元素 )
+    -&gt; .parent()
+    -&gt; .prev()
+    -&gt; .prevAll()
+    -&gt; .next()
+    -&gt; .nextAll()
+    -&gt; .sblings()
+-&gt; 去除重复元素
+    在数组中去除重复元素
+    arr
+    var tmp = [];
+    for ( ... arr ... ) {
+        if ( !tmp.contains( arr[ i ] ) ) {
+            tmp.push( arr[ i ] );
+        }
+    }
+</code></pre><p> 事件模块与样式属性<br>    -&gt; 事件复习<br>        -&gt; 什么是事件<br>            事件机制: 所谓的事件机制就是浏览器无时不刻在监视我们的行为, 但是浏览器不会做任何事情.<br>                     当我们在触发某个行为的时候, 浏览器会检查我们时候已经注册了对应的事件处理函数,<br>                     如果已经注册了事件处理函数, 那么浏览器就会调用对应的函数以响应我们的行为.<br>                     但是如果没有发现注册, 那么浏览器什么也不会处理.<br>                     这样的机制就是事件处理机制.<br>            所谓的注册, 简单的说就是告知浏览器有一个函数, 或多个函数, 一旦触发事件浏览器就会依次调用函数.<br>            事件处理函数.<br>            触发事件.<br>            用户事件. 事件名.<br>        -&gt; 如何使用代码注册事件<br>            -&gt; 可以使用什么事件<br>                使用的最多的是鼠标事件与键盘事件<br>                mousemove, mouseout, mouseover<br>                click, mousedown, mouseup<br>                keydown, keyup, keypress<br>            -&gt; 如何注册事件<br>                1) 使用属性赋值<br>                    btn.onclick = function () { … }<br>                2) 标准做法<br>                    btn.addEventListener( ‘click’, function() { … } )<br>        -&gt; 在 jq 中事件的使用方法<br>            在 jq 中添加点击事件, 可以使用<br>                $( ‘…’ ).on( ‘click’, function () { … } )<br>                $( ‘…’ ).click( function () { … })</p>
+<pre><code>-&gt; on 方法 与 off 方法
+    -&gt; 首先考虑实现通用的 on 方法
+        语法: $obj.on( 事件名, 事件处理函数 )
+        功能: 给每一个 dom 元素都绑定对应的事件处理函数 
+        实现: 遍历 然后给每一个元素都增加 事件
+    -&gt; 移除事件, 使用 removeEventListener
+        语法: $obj.off( 事件名, 事件处理函数 )
+
+-&gt; 其他事件
+    click
+    Ace.fn[ &apos;click&apos; ] = function ( callback ) {
+        return this.on( &apos;click&apos;, callback );
+    };
+
+    mouseover
+    Ace.fn[ &apos;mouseover&apos; ] = function ( callback ) {
+        return this.on( &apos;mouseover&apos;, callback );
+    };
+
+
+    &apos;click,mouseover,mousedown&apos;.split( &apos;,&apos; ).forEach(function ( v ) {
+        Ace.fn[ v ] = function ( callback ) {
+            return this.on( v, callback );
+        };
+    });
+
+    可以使用什么事件:
+    abort,blur,cancel,canplay,canplaythrough,change,click,close,contextmenu,cuechange,dblclick,drag,dragend,dragenter,dragleave,dragover,dragstart,drop,durationchange,emptied,ended,error,focus,input,invalid,keydown,keypress,keyup,load,loadeddata,loadedmetadata,loadstart,mousedown,mouseenter,mouseleave,mousemove,mouseout,mouseover,mouseup,mousewheel,pause,play,playing,progress,ratechange,reset,resize,scroll,seeked,seeking,select,show,stalled,submit,suspend,timeupdate,toggle,volumechange,waiting,autocomplete,autocompleteerror,beforecopy,beforecut,beforepaste,copy,cut,paste,search,selectstart,wheel,webkitfullscreenchange,webkitfullscreenerror
+
+-&gt; 样式操作
+    css, addClass, removeClass, hasClass, toggleClass
+    -&gt; css
+        1) css( &apos;color&apos;, &apos;blue&apos; )
+        2) css( &apos;color&apos; )
+        3) css( { color: &apos;red&apos; } )
+    -&gt; addClass
+    -&gt; removeClass
+        &lt;div class=&quot;c c1 c2 c&quot;&gt;&lt;/div&gt; 
+    -&gt; hasClass
+    -&gt; toggleClass
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/11/jquery原理2/" data-id="cj2ju7ten00022gt5xod36ovw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/03/test1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">test1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/好好学习天天向上/">好好学习天天向上</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/好好学习天天向上/" style="font-size: 10px;">好好学习天天向上</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/11/jquery原理2/">jquery原理2</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/03/test1/">test1</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/02/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 pry<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
