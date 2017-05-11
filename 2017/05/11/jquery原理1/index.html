@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的博客</title>
+  <title>jquery原理1 | 我的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="与其感慨路难行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="选择函数封装        假定我们提供 jquery 函数, 来完成选择工作        jquery( ‘div &amp;gt; input’ ).each( function () {            this.XXX        })     可以由两种方案     1&amp;gt; 封装对象         function jquery ( selector ) {">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery原理1">
+<meta property="og:url" content="http://yoursite.com/2017/05/11/jquery原理1/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="与其感慨路难行">
+<meta property="og:description" content="选择函数封装        假定我们提供 jquery 函数, 来完成选择工作        jquery( ‘div &amp;gt; input’ ).each( function () {            this.XXX        })     可以由两种方案     1&amp;gt; 封装对象         function jquery ( selector ) {">
+<meta property="og:updated_time" content="2017-05-11T03:50:42.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
-<meta name="twitter:description" content="与其感慨路难行">
+<meta name="twitter:title" content="jquery原理1">
+<meta name="twitter:description" content="选择函数封装        假定我们提供 jquery 函数, 来完成选择工作        jquery( ‘div &amp;gt; input’ ).each( function () {            this.XXX        })     可以由两种方案     1&amp;gt; 封装对象         function jquery ( selector ) {">
   
     <link rel="alternate" href="/atom.xml" title="我的博客" type="application/atom+xml">
   
@@ -66,9 +67,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-jquery原理1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-jquery原理1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/11/jquery原理1/" class="article-date">
   <time datetime="2017-05-11T03:50:09.000Z" itemprop="datePublished">2017-05-11</time>
@@ -81,8 +80,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/11/jquery原理1/">jquery原理1</a>
+    <h1 class="article-title" itemprop="name">
+      jquery原理1
     </h1>
   
 
@@ -220,151 +219,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-jquery原理2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/11/jquery原理2/" class="article-date">
-  <time datetime="2017-05-11T03:08:44.000Z" itemprop="datePublished">2017-05-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/11/jquery原理2/">jquery原理2</a>
-    </h1>
+    <a href="/2017/05/11/jquery原理2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">jquery原理2</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>框架和库是什么?<br>        库: 仓库, 表示的是很多为了实现特殊功能而封装的, 便于使用开发的 函数, 对象 和 常量等.<br>            例如:<br>            // 在 dom 元素下, 获得 复合 tagName 的元素,<br>            // 如果不提供 dom 参数, 那么就是默认 document<br>            function getTag( tagName, dom ) {<br>                dom = dom || document;<br>                return dom.getElementsByTagName( tagName );<br>            }</p>
-<pre><code>    getTag( &apos;div&apos;, dv );
-
-    在开发过程中为了实现更加方便的使用, 封装这些方法, 然后组合到一起以供使用, 这样就构成了库.
-
-框架: 是一套完整的开发解决方案. 框架一般提供了一些方便的开发格式与方法, 我们只需要按照他的格式
-    使用即可, 不需要关注一些具体的实现.
-</code></pre>
-        
-          <p class="article-more-link">
-            <a href="/2017/05/11/jquery原理2/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/11/jquery原理2/" data-id="cj2jvmnx10005zkt58m7q2nxp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-test1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/03/test1/" class="article-date">
-  <time datetime="2017-05-03T13:19:14.000Z" itemprop="datePublished">2017-05-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/03/test1/">test1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用github pages服务搭建博客的好处有：</p>
-<ol>
-<li>全是静态文件，访问速度快；</li>
-<li>免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</li>
-<li>可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</li>
-</ol>
-        
-          <p class="article-more-link">
-            <a href="/2017/05/03/test1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/03/test1/" data-id="cj2jvmnwd0002zkt5kjv3uu5m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/好好学习天天向上/">好好学习天天向上</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/02/hello-world/" class="article-date">
-  <time datetime="2017-05-02T10:20:12.956Z" itemprop="datePublished">2017-05-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/02/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/02/hello-world/" data-id="cj2jvmnwd0001zkt5iyrcynve" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
