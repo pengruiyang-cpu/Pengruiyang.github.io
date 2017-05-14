@@ -68,6 +68,94 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-原生ajax个人理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/14/原生ajax个人理解/" class="article-date">
+  <time datetime="2017-05-14T02:25:36.000Z" itemprop="datePublished">2017-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/14/原生ajax个人理解/">原生ajax个人理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ajax个人理解<br>什么是Ajax？<br>    在不刷新页面的情况下，浏览器悄悄地、异步地向服务器发出HTTP请求。<br>    服务器收到请求后，传回新的格式化数据回来（前端通常是JSON，也有xml（少））。<br>    浏览器解析JSON，通过DOM将新数据呈递显示，页面仅局部刷新<br>form表单的ajax请求<br>    form 默认请求方式就是get请求，get请求会把表单数据作为url的参数进行提交<br>http协议的常用请求方式<br>（增删改查）<br>       a、get 用来从服务器获取数据（参数一般作为查询条件）<br>       b、post 用来添加数据<br>       c、put  用来修改数据<br>       d、delete 用来删除数据<br>json的tips<br>什么是JSON<br>    1.JavaScript 对象表示法<br>    2.是存储和交换文本信息的语法<br>    3.轻量级的文本数据交换格式</p>
+<p>JSON数据和普通的JS兑现的区别<br>    1.json 对象没有变量<br>    2.json 形式的数据结尾没有分号<br>    3.json 数据中的键必须用双引号包括</p>
+<p>JSON和XML对比</p>
+<pre><code>- JSON 比 XML 更小、更快，更易解析
+- 前端多用json。其他方面可能xml使用更多
+</code></pre><p>把JSON文本转换为JavaScript对象<br>    JSON 最常见的用法之一，是从 web 服务器上读取 JSON 数据（作为文件或作为 HttpRequest），将 JSON 数据转换为 JavaScript 对象，然后在网页中使用该数据。</p>
+<p> 为什么要转换？<br>    在数据传输过程中，json是以文本，即字符串的形式传递的，而JS操作的是JSON对象，所以，JSON对象和JSON字符串之间的相互转换是关键。</p>
+<p> 转换的方法<br>    JSON_parse()         — 把json形式的字符串转成对象<br>    JSON_stringify()   — 把对象转成字符串<br>    eval()              — 把字符串解析成JS代码并执行</p>
+<p>重点！！！！</p>
+<p>原生Ajax详解<br>1.xhr对象创建</p>
+<pre><code>1. 标准下 --- xhr = new XMLHttpRequest();
+2. IE6   --- xhr = new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);
+</code></pre><ol>
+<li><p>open()方法<br> 参数一： 请求方式（get获取数据，post提交数据）；<br> 参数二： 请求的地址<br> 参数三： 同步或者异步标识位，默认是true标识true，false表示<br> xhr.open(“get”,”test.txt”,true);调用open方法并不会真正发送请求，而只是启动一个请求以备发送。它接受三个参数：要发送的请求的类型、请求的URL、表示是否异步的布尔值。</p>
+<pre><code>注意：如果是get请求，那么请求参数必须在url中传递 encodeURI()用来对中文参数进行编码，防止乱码。
+</code></pre><p>3.send()方法</p>
+<pre><code>1.get请求这里需要添加null参数
+2.post请求参数通过send传递，不需要通过encodeURI()转码，但是必须需要设置请求头参数。
+xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+如果要发送请求，用send()方法。
+     要发送特定的请求，需要调用send()方法。它接受一个参数，即要作为请求主体发送的数据。如果不需要通过请求主体发送数据，则必须传入null，不能留空。
+     get请求是只有头部，没有主体的；而post请求有请求主体。
+</code></pre><p>4.readyState属性（表示“就绪状态”）；</p>
+<pre><code>xhr.readyState （=4）
+readyState取值只有5种值：0、1、2、3、4
+0 (uninitialized)    未初始化
+1 (loading)             XMLHttpRequest对象正在加载
+2 (loaded)            XMLHttpRequest对象加载完毕
+3 (interactive)        正在传输数据
+4 (complete)            全部完成
+
+只要readyState属性值发生了变化，就会触发一个事件onreadystatechange事件。
+此时，可以用
+   xhr.onreadystatechange = function(){}
+来捕获readyState改变之后做的事情。
+
+Ajax一旦用send方法发出HTTP请求之后，当readyState为4的时候，就会有一个属性产生 --- xhr.status （=200）
+表示的是请求的文件的状态码
+
+1**  ----  消息
+2**  ----  代码请求成功
+3**  ----  重定向
+4**  ----  请求错误
+5**  ----  服务器错误
+6**  ----  其它
+
+ var data = xhr.responseText;
+ 获取返回的数据
+</code></pre></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/14/原生ajax个人理解/" data-id="cj2o38kom0004y4t5xapxomav" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ajax/">ajax</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-jquery原理1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/11/jquery原理1/" class="article-date">
@@ -214,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/11/jquery原理1/" data-id="cj2jvoank00011kt502n614iu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/11/jquery原理1/" data-id="cj2o38koj0002y4t5qidmq1sl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/11/jquery原理2/" data-id="cj2jvoank00021kt51bv03l9s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/11/jquery原理2/" data-id="cj2o38kog0001y4t5d2uuxnsf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/03/test1/" data-id="cj2jvoank00031kt5n9tq9p2x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/03/test1/" data-id="cj2o38kol0003y4t54zywbnp8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/好好学习天天向上/">好好学习天天向上</a></li></ul>
@@ -355,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/02/hello-world/" data-id="cj2jvoanc00001kt5j102g40b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/02/hello-world/" data-id="cj2o38kob0000y4t511chzwpc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,7 +465,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/好好学习天天向上/">好好学习天天向上</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/好好学习天天向上/">好好学习天天向上</a></li></ul>
     </div>
   </div>
 
@@ -387,7 +475,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/好好学习天天向上/" style="font-size: 10px;">好好学习天天向上</a>
+      <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/好好学习天天向上/" style="font-size: 10px;">好好学习天天向上</a>
     </div>
   </div>
 
@@ -407,6 +495,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/14/原生ajax个人理解/">原生ajax个人理解</a>
+          </li>
         
           <li>
             <a href="/2017/05/11/jquery原理1/">jquery原理1</a>
